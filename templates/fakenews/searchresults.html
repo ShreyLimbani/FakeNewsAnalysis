@@ -1,9 +1,10 @@
 {% extends 'layout.html' %}
 {% load static %}
+
 {% block css %}
     <style>
         h1{
-            font-size: 70px;
+            font-size: 40px;
             font-weight: 700;
             font-family: 'Rajdhani';
         }
@@ -15,8 +16,17 @@
         }
     </style>
 {% endblock %}
+
+{% block navbar-search %}
+    <form class="form-inline my-2 my-lg-0 ml-12">
+        <li class="nav-item">
+            <input class="form-control" type="search" name="search" placeholder="Search" aria-label="Search">
+        </li>
+    </form>
+{% endblock %}
+
 {% block content %}
 
-    <h1> Analytics </h1>
+    <h1> Search Results : {{ search }}</h1>
 
 {% endblock %}

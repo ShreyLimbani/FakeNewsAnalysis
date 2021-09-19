@@ -18,12 +18,6 @@
         <!-- Regular MDB theme -->
         <!-- <link rel="stylesheet" href="css/mdb.min.css" /> -->
         <style>
-          body{
-            background-color: #000000b8;
-            background-image: url("{% static 'fakenews/img/background.jpg' %}");
-            background-size:cover;
-            background-blend-mode: overlay;
-          }
           .center {
             margin-top: 10%;
             text-align: center;
@@ -37,13 +31,15 @@
         <!-- Start your project here-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
-              <a class="navbar-brand" href="#">Scopolamine</a>
+              <a class="navbar-brand" href="{% url 'index' %}">Scopolamine</a>
               <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarColor02">
                 <ul class="navbar-nav me-auto">
                   <!-- Used this ul tag for aligning the next ul to right side -->
+                  {% block navbar-search %}
+                  {% endblock %}
                 </ul>
                 <ul class="navbar-nav d-flex flex-row">
                   <li class="nav-item">

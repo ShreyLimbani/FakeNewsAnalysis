@@ -1,11 +1,44 @@
 {% extends 'layout.html' %}
-
+{% load static %}
 {% block css %}
     <style>
+        body{
+            background-color: #000000b8;
+            background-image: url("{% static 'fakenews/img/background.jpg' %}");
+            background-size:cover;
+            background-blend-mode: overlay;
+        }
         h1{
             font-size: 70px;
             font-weight: 700;
             font-family: 'Rajdhani';
+        }
+        .searchbox-outer{
+            border-radius: 20px;
+            background: #ffffff;   
+        }
+        .searchbox-icon{
+            padding: 5px 0px;
+            margin: 0px;
+            color: #000000b0;
+            font-size: larger;
+        }
+
+        input{
+            border: #ffffff;
+        }
+        input:focus{
+            outline: none;
+        }
+        .searchbox-button{
+            margin: 0px;
+            padding: 5px 0px;
+            flex-direction: column;
+            align-items: center;
+            border-left: 1px solid #000000b0;
+            color: #000000b0;
+            font-weight: 700;
+            cursor: grab;
         }
     </style>
 {% endblock %}
@@ -13,5 +46,27 @@
 {% block content %}
     <div>
         <h1>Scopolamine</h1>
+        <div class="container">
+            <form action="{% url 'searchresults' %}" method="GET">
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-6 searchbox-outer">
+                        <div class="row">
+                            <div class="col-1 searchbox-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            
+                            <div class="col-10 searchbox-text row">
+                                <input name="search" placeholder="Search for fake news" class="" autofocus>
+                            </div>
+                            <div class="col-1 searchbox-button row">
+                                <p style="margin-bottom: 0px;">Search</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3"></div>
+                </div>
+            </form>
+        </div>      
     </div>
 {% endblock %}
