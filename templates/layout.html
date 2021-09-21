@@ -18,11 +18,18 @@
         <!-- Regular MDB theme -->
         <!-- <link rel="stylesheet" href="css/mdb.min.css" /> -->
         <style>
-          .center {
-            margin-top: 10%;
-            text-align: center;
-          }
-              
+            .navbar-brand{
+              font-size: 30px;
+              font-weight: 700;
+              font-family: 'Rajdhani';
+            }
+            .navbar-input{
+              width: 50vw;
+              border-radius: 20px;
+            }
+            .navbar-input:focus{
+              outline: none;
+            }
         </style>
     </head>
     {% block css %}
@@ -38,8 +45,13 @@
               <div class="collapse navbar-collapse" id="navbarColor02">
                 <ul class="navbar-nav me-auto">
                   <!-- Used this ul tag for aligning the next ul to right side -->
-                  {% block navbar-search %}
-                  {% endblock %}
+                  {% if form_action %}
+                  <form action="{% url form_action %}" method="GET" class="form-inline my-2 my-lg-0 ml-12">
+                    <li class="nav-item">
+                      <input class="form-control navbar-input" value="{{search}}" type="search" name="search"  placeholder="Search" aria-label="Search"/>
+                    </li>
+                  </form>
+                  {% endif %}
                 </ul>
                 <ul class="navbar-nav d-flex flex-row">
                   <li class="nav-item">
@@ -63,4 +75,12 @@
             {% endblock %}
         </div>
     </body>
+
+    <script>
+      function search(){
+          document.querySelector('form').submit();
+      }
+    </script>
+    {% block js %}
+    {% endblock %}
 </html>

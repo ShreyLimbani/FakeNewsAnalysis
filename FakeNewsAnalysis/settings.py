@@ -22,6 +22,8 @@ PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure--tfx&#p)2x&epzqrzw#-qd)odeepo-!$=(^wpn+9@gc)i8f7e#'
 
+NEWS_API_KEY = '15781ad13c1f4104b3f040605995e478'
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 

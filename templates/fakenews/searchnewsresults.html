@@ -1,20 +1,114 @@
 {% extends 'layout.html' %}
+{% load static %}
 {% block css %}
     <style>
+        .heading{
+            margin:5px;
+            padding:5px;
+        }
+        .center {
+            text-align: center;
+          }
         h1{
-            font-size: 70px;
+            font-size: 60px;
             font-weight: 700;
             font-family: 'Rajdhani';
         }
         body{
             background-color: #000000df;
-            background-size:cover;
+            background-image: url("{% static 'fakenews/img/background2.jpg' %}");
+            background-size:inherit;
             background-blend-mode: overlay;
+        }
+        .card{
+            opacity: 0.75;
+        }
+        .card-body{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .card-img-top{
+            height:30vh;
+        }
+        .pagination-div{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            margin: 3vh;
         }
     </style>
 {% endblock %}
+
 {% block content %}
+    <div class="heading">
+        <h1> Search News Results</h1>
+    </div>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for art in articles %}
+        <div class="col">
+            <div class="card h-100">
+                <!--img src="" class="card-img-top" alt="..." /-->
+                <img src="{{art.urlToImage}}" class="card-img-top" alt="..." />
+                <div class="card-body">
+                    <h5 class="card-title">{{art.title}}</h5>
+                    <p class="card-text">
+                    <small class="text-muted"><a href="{{art.url}}">{{art.source.name}}</a></small>
+                    </p>
+                    <p class="card-text">
+                        {{art.description|striptags}}
+                    </p>
+                    <div class="card-footer">
+                        <p class="card-text">
+                            <small class="text-muted">Date Published: {{art.publishedAt|slice:10}}</small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="pagination-div"> 
+        <nav aria-label="...">
+            <ul class="pagination pagination-lg">
+                
+                <li class="page-item">
+                    <a class="page-link" href="{% url 'searchnewsresults' %}?search={{search}}&page=1" tabindex="-1" aria-disabled="true">First</a>
+                </li>
 
-    <h1> Search News Results</h1>
+                {% if current_page == 1 %}
+                <li class="page-item disabled">
+                    <a class="page-link" tabindex="-1" aria-disabled="true">Previous</a>
+                </li>
+                <li class="page-item disabled"><a class="page-link" href="{% url 'searchnewsresults' %}?search={{search}}&page={{prev}}">{{ prev }}</a></li>
+                {% else %}
+                <li class="page-item">
+                    <a class="page-link" href="{% url 'searchnewsresults' %}?search={{search}}&page={{prev}}" tabindex="-1" aria-disabled="true">Previous</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="{% url 'searchnewsresults' %}?search={{search}}&page={{prev}}">{{ prev }}</a></li>
+                {% endif %}
 
+                <li class="page-item active" aria-current="page">
+                    <a class="page-link">{{ current_page }} <span class="visually-hidden">(current)</span></a>
+                </li>
+                
+                {% if current_page == total_pages %}
+                <li class="page-item disabled"><a class="page-link" href="{% url 'searchnewsresults' %}?search={{search}}&page={{next}}">{{ next }}</a></li>
+                <li class="page-item disabled">
+                    <a class="page-link" tabindex="-1" aria-disabled="true">Next</a>
+                </li>
+                {% else %}
+                <li class="page-item"><a class="page-link" href="{% url 'searchnewsresults' %}?search={{search}}&page={{next}}">{{ next }}</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="{% url 'searchnewsresults' %}?search={{search}}&page={{next}}" tabindex="-1" aria-disabled="true">Next</a>
+                </li>
+                {% endif %}
+
+                <li class="page-item">
+                    <a class="page-link" href="{% url 'searchnewsresults' %}?search={{search}}&page={{total_pages}}" tabindex="-1" aria-disabled="true">Last</a>
+                </li>
+
+            </ul>
+        </nav>
+    </div>
 {% endblock %}
