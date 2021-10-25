@@ -48,7 +48,11 @@
                   {% if form_action %}
                   <form action="{% url form_action %}" method="GET" class="form-inline my-2 my-lg-0 ml-12">
                     <li class="nav-item">
-                      <input class="form-control navbar-input" value="{{search}}" type="search" name="search"  placeholder="Search" aria-label="Search"/>
+                      {% if form_action == 'searchnewsresults' %}
+                        <input class="form-control navbar-input" value="{{search}}" autofocus type="search" name="search"  placeholder="Search News" aria-label="Search"/>
+                      {% else %}
+                        <input class="form-control navbar-input" value="{{search}}" autofocus type="search" name="search"  placeholder="Search Fake News" aria-label="Search"/>
+                      {% endif %}
                     </li>
                   </form>
                   {% endif %}
